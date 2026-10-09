@@ -10,10 +10,11 @@ from modules.utils_module import parse_arguments, get_folder_path
 
 def main():
     args = parse_arguments()
+    
     if args.path:
         folder = args.path
     else:
-        folder = get_folder_path
+        folder = get_folder_path()
 
     if not os.path.isdir(folder):
         print("Folder does not exist.")
@@ -46,19 +47,18 @@ def main():
         return
 
     undo_log = open(undo_log_path, "w")
-
-    main_folder = args.path
+    main_folder = folder
     dry_run = args.dry_run
 
     all_files = [f for f in os.listdir(folder) if os.path.isfile(os.path.join(folder, f))]
     total_files = len(all_files)
     processed = 0
 
-    fn = FileManager()
+    fn = FileManager(undo_log_path)
 
     for item in all_files:
         item_path = os.path.join(main_folder, item)
-        fn.move_file(item_path, main_folder, dry_run)
+        fn.move_file(item_path, main_folder, dry_run, undo_log)
 
         processed += 1
         percent = (processed / total_files) * 100

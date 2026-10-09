@@ -1,6 +1,7 @@
 import os
 import shutil
 from datetime import datetime
+
 from modules.metadata_module import get_metadata
 from modules.timestamp_module import get_timestamp
 from modules.constrants_module import PHOTO_EDITED_EXT, PHOTO_JPG_EXT, PHOTO_RAW_EXT, VIDEO_EXT, LOG_EXT
@@ -11,7 +12,7 @@ class FileManager:
         self.undo_log_path = undo_log_path
         self.undo_log = []
 
-    def move_file(self, path, root_output, dry_run=False):
+    def move_file(self, path, root_output, dry_run=False, undo_log=None):
         """
         Manages file operations, including moving files to appropriate subfolders based on their metadata and timestamp.
         
@@ -73,8 +74,3 @@ class FileManager:
             print(f"Moved {path} -> {final_path}")
         except Exception as e:
             print(f"Error moving file: {e}")
-
-    def save_undo_log(self):
-        with open(self.undo_log_path, "w") as f:
-            for entry in self.undo_log:
-                f.write(f"{entry}\n")

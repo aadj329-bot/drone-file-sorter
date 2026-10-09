@@ -26,19 +26,19 @@ pip install -r requirements.txt
 ### DRY-RUN Usage
 
 ```bash
-python main.py --path~desired-folder --dry-run
+python main.py --path~/desired-folder --dry-run
 ```
 
 ### Usage
 
 ```bash
-python main.py --path~desired-folder
+python main.py --path~/desired-folder
 ```
 
 ### Undo
 
 ```bash
-python main.py --path~desired-folder --undo
+python main.py --path~/desired-folder --undo
 ```
 
 ## Contributing
